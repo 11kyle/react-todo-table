@@ -1,25 +1,52 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Table from './Components/Table';
+import Form from './Components/Form';
 import './App.css';
 
 class App extends Component {
+  state = {
+    characters: [
+      {
+          'name': 'Charlie',
+          'job': 'Janitor'
+      },
+      {
+          'name': 'Mac',
+          'job': 'Bouncer'
+      },
+      {
+          'name': 'Dee',
+          'job': 'Aspring actress'
+      },
+      {
+          'name': 'Dennis',
+          'job': 'Bartender'
+      }
+    ]
+  };
+
+  removeCharacter = index => {
+    this.setState({
+      characters: this.state.characters.filter((character, i) => {
+        return i !== index;
+      })
+    });
+  }
+
+  onSubmit = (character) => {
+    this.setState({
+      characters: [...this.state.characters, character]
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="container">
+        <Form onSubmit={this.onSubmit}/>
+        <Table
+          characters={this.state.characters}
+          removeCharacter={this.removeCharacter}
+        />
       </div>
     );
   }
