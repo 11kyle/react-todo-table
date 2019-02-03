@@ -61,7 +61,7 @@ class Form extends Component {
             <input
               className="btn btn-success"
               type="submit"
-              value="Submit"
+              value="Add"
             />
           </div>
         </div>
